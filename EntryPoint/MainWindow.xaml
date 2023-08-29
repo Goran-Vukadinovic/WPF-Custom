@@ -1,0 +1,42 @@
+﻿<Window x:Class="EntryPoint.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EntryPoint"
+        xmlns:control="clr-namespace:EntryPoint.Control"
+        xmlns:dc="clr-namespace:EntryPoint.ViewModel"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        mc:Ignorable="d"
+        PreviewMouseDown="Window_PreviewMouseDown"
+        WindowStartupLocation="CenterScreen"
+        Title="MainWindow" Height="600" Width="1192">
+    <Window.DataContext>
+        <dc:MainWindowViewModel />
+    </Window.DataContext>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="PreviewKeyDown">
+            <i:InvokeCommandAction Command="{Binding KeyCommand}" PassEventArgsToCommand="True" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="CabooseViewDataTemplate">
+                <control:MyToolBar />
+            </DataTemplate>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <control:MyToolBar Grid.Row="0" x:Name="MyToolBarControl"/>
+
+        <control:AskAI Grid.Row="1" x:Name="MyAskAIControl" Margin="0,10,0,0" />
+
+        <control:Proofreading Grid.Row="2" x:Name="MyProofreadingControl" Margin="0,10,0,0" />
+    </Grid>
+</Window>
